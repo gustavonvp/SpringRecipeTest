@@ -23,6 +23,25 @@ public class Recipe {
     @Lob
     private Byte[] image;
 
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficult;
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredientSet;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+        this.ingredientSet = ingredientSet;
+    }
+
+    public Difficulty getDifficult() {
+        return difficult;
+    }
+
+    public void setDifficult(Difficulty difficult) {
+        this.difficult = difficult;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
