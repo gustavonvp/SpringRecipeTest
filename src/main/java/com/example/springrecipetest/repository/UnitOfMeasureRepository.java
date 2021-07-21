@@ -1,7 +1,11 @@
 package com.example.springrecipetest.repository;
 
-import com.example.springrecipetest.domain.Category;
+import com.example.springrecipetest.domain.UnitOfMeasure;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UnitOfMeasureRepository extends CrudRepository<Category, Long> {
+import java.util.Optional;
+
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long> {
+
+    Optional<UnitOfMeasure> findByDescription(String description);
 }
