@@ -1,6 +1,7 @@
 package com.example.springrecipetest.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,12 @@ public class Recipe {
     private Integer cookTime;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredientSet;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -34,22 +37,34 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
      joinColumns = @JoinColumn(name = "recipe_id"),
      inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
 
-    public Set<Ingredient> getIngredientSet() {
-        return ingredientSet;
+    private Set<Category> categories = new HashSet<>();
+
+
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
 
-    public void setIngredientSet(Set<Ingredient> ingredientSet) {
-        this.ingredientSet = ingredientSet;
-    }
-
-    public Difficulty getDifficult() {
-        return difficult;
-    }
-
-    public void setDifficult(Difficulty difficult) {
+    public Recipe(String description, Integer prepTime, Integer cookTime, Difficulty difficult, String directions) {
+        this.description = description;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
         this.difficult = difficult;
+        this.directions = directions;
+    }
+
+    public Recipe() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -100,6 +115,11 @@ public class Recipe {
         this.directions = directions;
     }
 
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public Byte[] getImage() {
         return image;
     }
@@ -108,27 +128,30 @@ public class Recipe {
         this.image = image;
     }
 
+    public Difficulty getDifficult() {
+        return difficult;
+    }
+
+    public void setDifficult(Difficulty difficult) {
+        this.difficult = difficult;
+    }
+
     public Notes getNotes() {
         return notes;
     }
 
     public void setNotes(Notes notes) {
-        this.notes = notes;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setIngredients(Ingredient ingredient) {
+         this.ingredients = ingredients;
     }
 }
