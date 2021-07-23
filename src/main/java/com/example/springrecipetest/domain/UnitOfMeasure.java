@@ -1,11 +1,14 @@
 package com.example.springrecipetest.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@EqualsAndHashCode(exclude = {"recipe"})
 public class UnitOfMeasure   {
 
     @Id
