@@ -1,5 +1,6 @@
 package com.example.springrecipetest.commands;
 
+import com.example.springrecipetest.domain.UnitOfMeasure;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,4 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UnitOfMeasureCommand {
+
+    private Long id;
+    private String description;
 }

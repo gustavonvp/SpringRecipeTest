@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
 public class Ingredient {
+    public Long getId() {
+        return id;
+    }
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -17,6 +20,10 @@ public class Ingredient {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
@@ -72,4 +79,6 @@ public class Ingredient {
         this.uom = uom;
         this.recipe = recipe;
     }
+
+
 }

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 @EqualsAndHashCode(exclude = {"recipe"})
 public class UnitOfMeasure   {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
