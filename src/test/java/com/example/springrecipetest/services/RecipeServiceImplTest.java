@@ -1,6 +1,8 @@
 package com.example.springrecipetest.services;
 
 
+import com.example.springrecipetest.converters.RecipeCommandToRecipe;
+import com.example.springrecipetest.converters.RecipeToRecipeCommand;
 import com.example.springrecipetest.domain.Recipe;
 import com.example.springrecipetest.repository.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,11 +24,16 @@ class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -58,5 +65,6 @@ class RecipeServiceImplTest {
         assertEquals(recipes.size(), 1);
 
         verify(recipeRepository, times(1)).findAll();
+        verify(recipeRepository, never()).findById(anyLong());
     }
 }

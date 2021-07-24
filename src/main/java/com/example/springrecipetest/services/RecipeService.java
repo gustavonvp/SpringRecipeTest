@@ -1,5 +1,6 @@
 package com.example.springrecipetest.services;
 
+import com.example.springrecipetest.commands.RecipeCommand;
 import com.example.springrecipetest.domain.Recipe;
 import org.springframework.stereotype.Service;
 
@@ -10,4 +11,5 @@ public interface RecipeService  {
 
  Set<Recipe> getRecipes();
  Recipe findById(Long l);
+ RecipeCommand saveRecipeCommand(RecipeCommand command);
 }

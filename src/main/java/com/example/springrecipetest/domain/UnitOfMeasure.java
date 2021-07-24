@@ -11,8 +11,6 @@ import javax.persistence.Id;
 @EqualsAndHashCode(exclude = {"recipe"})
 public class UnitOfMeasure   {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,11 +25,11 @@ public class UnitOfMeasure   {
         this.id = id;
     }
 
-    public String getDescripton() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.description = descripton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

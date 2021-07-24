@@ -24,12 +24,12 @@ class UnitOfMeasureRepositoryT {
     @Test
     void findByDescription() throws Exception {
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-        Assertions.assertEquals("Teaspoon", uomOptional.get().getDescripton());
+        Assertions.assertEquals("Teaspoon", uomOptional.get().getDescription());
     }
 
     @Test
     void findByDescriptionCup() throws Exception {
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
-        Assertions.assertEquals("Cup", uomOptional.get().getDescripton());
+        Assertions.assertEquals("Cup", uomOptional.get().getDescription());
     }
 }
