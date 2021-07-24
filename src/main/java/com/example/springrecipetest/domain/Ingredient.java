@@ -15,6 +15,22 @@ public class Ingredient {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     private String description;
     private BigDecimal amount;
 
@@ -47,6 +63,13 @@ public class Ingredient {
     }
 
     public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
         this.recipe = recipe;
     }
 }

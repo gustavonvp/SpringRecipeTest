@@ -157,4 +157,8 @@ public class Recipe {
     public void setIngredients(Ingredient ingredient) {
          this.ingredients = ingredients;
     }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
 }

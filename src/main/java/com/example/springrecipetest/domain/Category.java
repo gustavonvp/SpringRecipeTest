@@ -1,9 +1,11 @@
 package com.example.springrecipetest.domain;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
+
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipes"})
@@ -15,7 +17,7 @@ public class Category {
 
     private String description;
 
-    @ManyToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
 
