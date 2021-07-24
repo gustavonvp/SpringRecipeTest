@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
-        th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"
+          th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"
     >
 
     <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
@@ -26,42 +26,42 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
-                    <div class="panel-heading">
-                            <h1 class="panel-title">My Recipes!</h1>
+                <div class="panel-heading">
+                    <h1 class="panel-title">My Recipes!</h1>
 
-                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
-                    <table class="table table_hover">
+                        <table class="table table_hover">
                             <thead class="thead-inverse">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                    <th>View</th>
-                                </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>View</th>
+                                <th>Update</th>
+                            </tr>
                             </thead>
 
-                        <tr th:remove="all">
-                            <td>123</td>
-                            <td>Tasty Goodnees 1</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>123123</td>
-                            <td>Tasty Goodnees 2</td>
-                            <td><a href="#">View</a></td>
-                        </tr>
-                        <tr th:each="recipe : ${recipes}">
-                            <td th:text="${recipe.id}">344</td>
-                            <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                            <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}"
-                                th:text="${recipe.id}"
-                            ></a>View</td>
-                        </tr>
-                    </table>
+                            <tr th:remove="all">
+                                <td>123</td>
+                                <td>Tasty Goodnees 1</td>
+                                <td><a href="#">View</a></td>
+                            </tr>
+                            <tr th:remove="all">
+                                <td>123123</td>
+                                <td>Tasty Goodnees 2</td>
+                                <td><a href="#">View</a></td>
+                            </tr>
+                            <tr th:each="recipe : ${recipes}">
+                                <td th:text="${recipe.id}">344</td>
+                                <td th:text="${recipe.description}">Tasty Goodnees 3</td>
+                                <<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>

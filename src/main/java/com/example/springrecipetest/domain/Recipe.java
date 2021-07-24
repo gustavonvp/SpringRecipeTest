@@ -1,5 +1,6 @@
 package com.example.springrecipetest.domain;
 
+
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -62,6 +63,13 @@ public class Recipe {
 
     }
 
+    public void setNotes(Notes notes) {
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -118,6 +126,9 @@ public class Recipe {
         this.directions = directions;
     }
 
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
@@ -143,22 +154,11 @@ public class Recipe {
         return notes;
     }
 
-    public void setNotes(Notes notes) {
-        if (notes != null) {
-            this.notes = notes;
-            notes.setRecipe(this);
-        }
-    }
-
     public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setIngredients(Ingredient ingredient) {
-         this.ingredients = ingredients;
-    }
-
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
