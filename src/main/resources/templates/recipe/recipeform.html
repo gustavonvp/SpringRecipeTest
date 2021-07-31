@@ -65,12 +65,15 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficlutyValue : ${T(com.example.springrecipetest.domain.Difficulty).values()}"
+                                                th:value="${difficlutyValue.name()}"
+                                                th:text="${difficlutyValue.name()}">val</option>
+
                                     </select>
+
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
@@ -104,7 +107,7 @@
                                         <li>asdf</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
-                                        ' ' + ingredient.getUnitOfMeasure().getDescription() +
+                                        ' ' + ingredient.getUom().getDescription() +
                                         ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
                                         </li>
                                     </ul>
