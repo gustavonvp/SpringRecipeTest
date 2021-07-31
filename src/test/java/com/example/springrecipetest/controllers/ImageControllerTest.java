@@ -1,5 +1,6 @@
 package com.example.springrecipetest.controllers;
 
+import com.example.springrecipetest.commands.RecipeCommand;
 import com.example.springrecipetest.services.ImageService;
 import com.example.springrecipetest.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,11 @@ import java.nio.charset.StandardCharsets;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -49,5 +54,22 @@ class ImageControllerTest {
                 .andExpect(MockMvcResultMatchers.header().string("Location", "/recipe/1/show"));
 
         Mockito.verify(imageService, Mockito.times(1)).saveImageFile(anyLong(), any());
+    }
+
+
+    @Test
+    public void getImageForm() throws Exception {
+        //given
+        RecipeCommand command = new RecipeCommand();
+        command.setId(1L);
+
+        when(recipeService.findCommandById(anyLong())).thenReturn(command);
+
+        //when
+        mockMvc.perform(get("/recipe/1/image"))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeExists("recipe"));
+
+        Mockito.verify(recipeService,times(1)).findCommandById(anyLong());
     }
 }
