@@ -55,7 +55,7 @@ public class ImageController {
             byteArray[i++] = wrappedByte; //auth unboxing
         }
 
-        response.setContentType("image/jpeg");
+        response.setContentType("image/jpg");
         InputStream is = new ByteArrayInputStream(byteArray);
         IOUtils.copy(is, response.getOutputStream());
     }
