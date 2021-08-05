@@ -2,6 +2,7 @@ package com.example.springrecipetest.controllers;
 
 import com.example.springrecipetest.commands.RecipeCommand;
 import com.example.springrecipetest.domain.Recipe;
+import com.example.springrecipetest.exceptions.NotFoundException;
 import com.example.springrecipetest.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,19 @@ class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("recipe/show"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
+    }
+
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception {
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1l);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
