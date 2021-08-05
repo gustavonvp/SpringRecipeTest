@@ -1,11 +1,11 @@
 package com.example.springrecipetest.services;
 
-import com.example.springrecipetest.commands.UnitOfMeasureCommand;
 import com.example.springrecipetest.converters.IngredientCommandToIngredient;
 import com.example.springrecipetest.converters.IngredientToIngredientCommand;
 
 import com.example.springrecipetest.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.example.springrecipetest.converters.UnitOfMeasureToUnitOfMeasureCommand;
+import com.example.springrecipetest.exceptions.NotFoundException;
 import com.example.springrecipetest.repository.RecipeRepository;
 import com.example.springrecipetest.repository.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +28,7 @@ class IngredientServiceImplTest {
 
     @Mock
     RecipeRepository recipeRepository;
+
 
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
@@ -125,6 +126,7 @@ class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
     }
+
 
 
 

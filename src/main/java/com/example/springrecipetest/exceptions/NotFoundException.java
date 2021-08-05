@@ -1,10 +1,16 @@
 package com.example.springrecipetest.exceptions;
 
 
-//@ResponseStatus(HttpStatus.NOT_FOUND)
-public class NotFoundException extends RuntimeException{
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public NotFoundException(){super();}
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends RuntimeException {
+
+    private static final long serialVersionUID = -8460356990632230194L;
+
+    public NotFoundException() {
+    }
 
     public NotFoundException(String message) {
         super(message);
