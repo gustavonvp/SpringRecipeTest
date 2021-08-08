@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
 
 import java.nio.charset.StandardCharsets;
 
@@ -23,8 +24,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 class ImageControllerTest {
@@ -45,7 +45,9 @@ class ImageControllerTest {
         MockitoAnnotations.initMocks(this);
 
         controller = new ImageController(imageService, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
@@ -105,5 +107,13 @@ class ImageControllerTest {
 
         Assertions.assertEquals(s.getBytes().length, responseBytes.length);
 
+    }
+
+
+    @Test
+    public void testGetImageNumberFormatException() throws Exception {
+        mockMvc.perform(get("/recipe/asdf/recipeimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 }
