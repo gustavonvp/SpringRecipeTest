@@ -10,10 +10,11 @@ import java.util.Set;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipes"})
+@Table(name = "Category")
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;
@@ -25,7 +26,6 @@ public class Category {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

@@ -2,17 +2,15 @@ package com.example.springrecipetest.domain;
 
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
+@Table(name = "Unit_Of_Measure")
 public class UnitOfMeasure   {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;

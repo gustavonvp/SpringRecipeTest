@@ -9,10 +9,11 @@ import java.util.Set;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
+@Table(name = "Recipe")
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;

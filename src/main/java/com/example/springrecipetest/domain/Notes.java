@@ -8,10 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
+@Table(name = "Notes")
 public class Notes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne

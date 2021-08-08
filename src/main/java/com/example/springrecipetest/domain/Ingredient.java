@@ -9,10 +9,11 @@ import java.math.BigDecimal;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
+@Table(name = "Ingredient")
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
 
     public String getDescription() {
