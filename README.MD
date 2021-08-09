@@ -1,1 +1,1 @@
-[![CircleCI](https://circleci.com/gh/gustavonvp/SpringRecipeTest/tree/circleci-project-setup.svg?style=svg)](https://circleci.com/gh/gustavonvp/SpringRecipeTest/tree/circleci-project-setup)
+[![CircleCI](https://circleci.com/gh/gustavonvp/SpringRecipeTest/tree/master.svg?style=svg)](https://circleci.com/gh/gustavonvp/SpringRecipeTest/tree/master)
