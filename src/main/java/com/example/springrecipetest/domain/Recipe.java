@@ -1,5 +1,6 @@
 package com.example.springrecipetest.domain;
 
+
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -8,10 +9,11 @@ import java.util.Set;
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipe"})
+@Table(name = "Recipe")
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;
@@ -60,6 +62,13 @@ public class Recipe {
 
     public Recipe() {
 
+    }
+
+    public void setNotes(Notes notes) {
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public Long getId() {
@@ -118,6 +127,9 @@ public class Recipe {
         this.directions = directions;
     }
 
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
@@ -143,18 +155,11 @@ public class Recipe {
         return notes;
     }
 
-    public void setNotes(Notes notes) {
-        if (notes != null) {
-            this.notes = notes;
-            notes.setRecipe(this);
-        }
-    }
-
     public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setIngredients(Ingredient ingredient) {
-         this.ingredients = ingredients;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

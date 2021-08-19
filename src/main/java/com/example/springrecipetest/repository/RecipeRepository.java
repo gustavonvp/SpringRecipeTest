@@ -1,6 +1,5 @@
 package com.example.springrecipetest.repository;
 
-import com.example.springrecipetest.domain.Category;
 import com.example.springrecipetest.domain.Recipe;
 import org.springframework.data.repository.CrudRepository;
 

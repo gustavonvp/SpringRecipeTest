@@ -1,29 +1,31 @@
 package com.example.springrecipetest.domain;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @EqualsAndHashCode(exclude = {"recipes"})
+@Table(name = "Category")
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String description;
 
-    @ManyToMany(mappedBy = "category")
-    private Set<Recipe> recipes;
-
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes = new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -35,6 +37,4 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 }
