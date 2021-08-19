@@ -10,7 +10,7 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:11.0
+      - image: circleci/openjdk:8-jdk
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -22,12 +22,39 @@ jobs:
       - run:
           name: Test
           command: mvn test
+    working_directory: ~/repo
+    environment:
+      -Xmx3200m
+
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml"}}
+            - v1-dependencies-
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run test with gen code coverage
+      - run: mvn cobertura:cobertura
+
+      - store_test_results:
+          path: target/surefire-reports
+
+      - run:
+          name: Send to CodeCov
+          command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
   # CircleCI will run this workflow on every commit.
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  sample: 
+  sample:
     jobs:
       - build-and-test
