@@ -26,11 +26,6 @@ jobs:
     environment:
       -Xmx3200m
 
-      - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml"}}
