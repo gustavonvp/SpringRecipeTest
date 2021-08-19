@@ -12,9 +12,6 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
 
-    working_directory: ~/repo
-    environment:
-      -Xmx3200m
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -28,20 +25,10 @@ jobs:
           name: Test
           command: mvn test
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml"}}
-            - v1-dependencies-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
       # run test with gen code coverage
       - run: mvn cobertura:cobertura
 
-      - store_test_results:
-          path: target/surefire-reports
+
 
       - run:
           name: Send to CodeCov
