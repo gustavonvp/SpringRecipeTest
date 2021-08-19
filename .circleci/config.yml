@@ -15,6 +15,14 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       # Use mvn clean and package as the standard maven build phase
+  working_directory: ~/repo
+    environment:
+      -Xmx3200m
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Use mvn clean and package as the standard maven build phase
+
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -22,9 +30,6 @@ jobs:
       - run:
           name: Test
           command: mvn test
-    working_directory: ~/repo
-    environment:
-      -Xmx3200m
 
       - restore_cache:
           keys:
@@ -44,7 +49,6 @@ jobs:
       - run:
           name: Send to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
-
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
