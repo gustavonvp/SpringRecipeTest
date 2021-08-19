@@ -13,8 +13,6 @@ jobs:
       - image: circleci/openjdk:8-jdk
 
     working_directory: ~/repo
-    environment:
-      -Xmx3200m
     steps:
       # Checkout the code as the first step.
       - checkout
